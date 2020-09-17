@@ -63,14 +63,14 @@ class MoveTests extends Command
                 }
             }
 
-            foreach ($packages as $package) {
-                $path = dirname(getcwd().'/'.$package[1]).'/tests';
+            foreach ($packages as [$packageName, $packagePath]) {
+                $path = dirname(getcwd().'/'.$packagePath).'/tests';
 
                 if ($this->files->exists($path)) {
-                    $this->info('Moving tests for the package: '.$package[0]);
-                    $this->files->copyDirectory($path, base_path('tests/packages/'.$package[0]));
+                    $this->info('Moving tests for the package: '.$packageName);
+                    $this->files->copyDirectory($path, base_path('tests/packages/'.$packageName));
                 } else {
-                    $this->info('No tests found for: '.$package[0]);
+                    $this->info('No tests found for: '.$packageName);
                 }
             }
         } else {
